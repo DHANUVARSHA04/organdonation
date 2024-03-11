@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORGAN LINK</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-section">
+            <a href="#"><img src="logo-no-background.png" alt="logo" id="logo" class="logo"></a>
+        </div>
+        <nav class="navigation-bar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Find Organ</a></li>
+                <li class="dropdown">
+                    <button id="login"><a href="#">Log in</a></button>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Admin</a></li>
+                        <li><a href="http://localhost:3000/doclogin">Doctor</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="doctor-login">
+
+        <h1>DOCTOR LOGIN</h1>
+        <form id="admin-login-form" class="field">
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" name="username" placeholder="Enter your user name"><br><br>
+
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password"><br><br>
+
+            <button type="submit">Login</button>
+        </form>
+
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminLoginForm = document.getElementById('admin-login-form');
+
+            adminLoginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                try {
+                    const formData = new URLSearchParams(new FormData(adminLoginForm)); // Serialize form data
+                    const response = await fetch('/doclogin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        window.location.href = '/patdisp';
+                    } else {
+                        const errorText = await response.text();
+                        alert(errorText);
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    // Handle error cases if needed
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

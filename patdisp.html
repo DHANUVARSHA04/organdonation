@@ -1,0 +1,97 @@
+<!-- patdisp.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="patdisp.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-section">
+            <a href="home.html"><img src="doctorlogo.png" alt="logo" id="logo" class="logo"></a>
+        </div>
+        <nav class="navigation-bar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+
+            </ul>
+        </nav>
+
+        <div class="patient-links">
+            <ul>
+                <li><a href="http://localhost:3000/addpatient">Add patients</a></li>
+                <li><a href="http://localhost:3000/patdisp">View patients</a></li>
+            </ul>
+        </div>
+        <button id="logout">Log Out</button>
+    </header>
+    <div class="table-container">
+        <table id="patient-list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Organ</th>
+                    <th>Hospital</th>
+                    <th>Contact Number</th>
+                    <th>Blood Group</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="patients-data">
+                <!-- Patient data will be populated here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <a href="http://localhost:3000/addpatient" class="logo-link">
+        <img src="Addround.png" alt="add" id="add" class="enlarged-logo">
+    </a>
+
+
+
+    </div>
+
+    <script>
+        fetch('/patients')
+            .then(response => response.json())
+            .then(patients => {
+                console.log('Fetched patients:', patients); // Check fetched data in console
+
+                const patientList = document.getElementById('patients-data');
+
+                // Clear any existing data in the table
+                patientList.innerHTML = '';
+
+                if (patients.length > 0) {
+                    patients.forEach(patient => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${patient.name}</td>
+                            <td>${patient.age}</td>
+                            <td>${patient.gender}</td>
+                            <td>${patient.organ}</td>
+                            <td>${patient.hospital}</td>
+                            <td>${patient.contact}</td>
+                            <td>${patient.blood_group}</td>
+                            <td>${patient.status}</td>`;
+                        patientList.appendChild(row);
+                    });
+                } else {
+                    const noPatientsRow = document.createElement('tr');
+                    noPatientsRow.innerHTML = '<td colspan="8">No patients found.</td>';
+                    patientList.appendChild(noPatientsRow);
+                }
+            })
+            .catch(error => console.error('Error fetching patient data:', error));
+    </script>
+
+</body>
+
+</html>

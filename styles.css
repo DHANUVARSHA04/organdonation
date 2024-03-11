@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: black;
+    padding: 15px 20px;
+}
+
+
+header #logo {
+    height: 50px;
+}
+
+nav ul {
+    text-align: right;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    position: absolute;
+    right: 20px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-align: right;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 16px;
+}
+
+nav ul li a:hover {
+    text-align: right;
+    text-decoration: underline;
+    border-radius: 5px;
+}
+
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+
+}
+
+.dropdown-content li {
+    padding: 10px;
+    border-top: 2px solid #8E3A80;
+
+}
+
+.dropdown-content li:hover {
+    background-color: #8E3A80;
+    color: white;
+    border-top: 2px solid #ffffff;
+
+}
+
+
+#login {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
+
+#login:hover {
+    text-decoration: underline;
+}
+
+.doctor-login {
+    position: absolute;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    left: 100px;
+    top: 200px;
+    width: 900px;
+    height: 230px;
+}
+
+.doctor-login button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #86487c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-left: 40px;
+    /* Add a smooth transition */
+}
+
+/* Hover effect for the submit button */
+.doctor-login button[type="submit"]:hover {
+    background-color: #8E3A80;
+}

@@ -1,0 +1,113 @@
+<!-- patients.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ADD PATIENTS</title>
+    <link rel="stylesheet" type="text/css" href="patients.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-section">
+            <a href="home.html"><img src="doctorlogo.png" alt="logo" id="logo" class="logo"></a>
+        </div>
+        <nav class="navigation-bar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+
+            </ul>
+        </nav>
+
+        <div class="patient-links">
+            <ul>
+                <li><a href="#">Add patients</a></li>
+                <li><a href="http://localhost:3000/patdisp">View patients</a></li>
+            </ul>
+        </div>
+        <button id="logout">Log Out</button>
+    </header>
+    <div class="form-details">
+        <h1>ADD PATIENT</h1>
+        <form action="/submit" method="post">
+            <!-- Updated action attribute -->
+            <div class="form-row">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required><br><br>
+            </div>
+            <div class="form-row">
+
+
+                <label for="organ">Organ</label>
+                <select id="organ" name="organ" required>
+                    <option value="Heart">Heart</option>
+                    <option value="Lungs">Lungs</option>
+                    <option value="Liver">Liver</option>
+                    <option value="Kidney">Kidney</option>
+                </select><br><br>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select><br><br>
+            </div>
+
+            <div class="form-row">
+                <label for="contact">Contact Number</label> <!-- Updated ID for phone to contact -->
+                <input type="tel" id="contact" name="contact" required><br><br>
+
+                <label for="blood_group">Blood Group</label>
+                <input type="text" id="blood_group" name="blood_group" required><br><br>
+            </div>
+            <div class="form-row">
+                <label for="hospital">Hospital</label>
+                <input type="text" id="hospital" name="hospital" required><br><br>
+
+            </div>
+            <input type="submit" value="Submit">
+    </div>
+    </form>
+    <div id="confirmation-message"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const patientForm = document.getElementById('patient-form');
+
+            patientForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent the default form submission behavior
+
+                try {
+                    const formData = new FormData(patientForm);
+                    const response = await fetch('/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const responseData = await response.text();
+                        alert(responseData); // Show the success message
+
+                        console.log('Redirecting to patdisp.html...'); // Log before redirection
+                        // Redirect to patdisp.html
+                        window.location.href = '/patdisp';
+                    } else {
+                        throw new Error('Failed to submit form');
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    // Handle error cases if needed
+                }
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
